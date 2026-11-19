@@ -40,6 +40,19 @@ Verify all files against the SHA-256 values below.
 
 ---
 
+## What Conflux Wallet is
+
+Conflux Wallet is a desktop application for CFX, not a web page and not a browser extension. It runs on Windows, macOS and Linux, and it holds accounts on both Conflux Core Space and eSpace in one window. The difference matters because the two spaces use different addresses for the same recovery phrase: a cfx: address on Core Space, a 0x address on eSpace, with separate balances and separate history.
+
+Because the keys are generated and encrypted locally, the application is also the only copy of the account that is not a written phrase. Nothing on a server can unlock it, reset the password or move funds, and the project cannot recover an account whose phrase was never backed up. The download and the release page are therefore the two things worth verifying before anything else.
+
+## Who it is for
+
+- you hold CFX and want it on your own machine rather than on an exchange
+- you use eSpace contracts and Core Space staking from the same account
+- you sign with a Ledger or a Trezor and want the transaction approved on the device
+- you support someone else's install and need the version and steps in one place
+
 ## Install
 
 <details open>
@@ -89,10 +102,18 @@ Verify all files against the SHA-256 values below.
 
 ## Networks
 
-Core Space is the native network, with `cfx:` base32 addresses, native transfers and
-staking. eSpace is the EVM-compatible network, with `0x` addresses and the contracts dApps
+Core Space is the native network, with cfx: base32 addresses, native transfers and
+staking. eSpace is the EVM-compatible network, with 0x addresses and the contracts dApps
 use. They share CFX but keep separate accounts, balances and history, and the wallet shows
 which one you are in before you sign anything.
+
+## How a transfer works here
+
+1. Choose the space first, because it decides the address format and the fee asset.
+2. Paste the recipient address and check that its prefix belongs to the space you chose.
+3. Enter the amount and read the fee estimate before confirming anything.
+4. Approve the transaction, then keep the hash: it is the only way to follow the transfer.
+5. Watch the status move from pending to included; a revert has its own reason on the explorer.
 
 ---
 
@@ -102,14 +123,32 @@ which one you are in before you sign anything.
 
 | Guide | What it covers |
 |---|---|
-| [Install Conflux Wallet on Windows](https://github.com/conflux-developments/setup-handbook/blob/HEAD/install-conflux-wallet-on-windows.md) | Download the Windows installer from the project's GitHub releases page, run it, allow the permission prompt, and open the app. |
-| [Conflux Wallet Download and Current Release](https://github.com/conflux-developments/setup-handbook/blob/HEAD/conflux-wallet-download-guide.md) | Download Conflux Wallet from the project's GitHub releases page, choosing the installer for your system: Windows, macOS or Linux. |
-| [Restore Conflux Wallet From Seed Phrase](https://github.com/conflux-developments/recovery-playbook/blob/HEAD/restore-conflux-wallet-from-seed-phrase.md) | Open Conflux Wallet, choose restore rather than create, and enter the recovery phrase in order, in lowercase, with single spaces. |
-| [Core Space vs eSpace](https://github.com/conflux-developments/setup-handbook/blob/HEAD/conflux-core-space-vs-espace.md) | Conflux has two spaces on one network. |
+| [Install Conflux Wallet on Windows](https://github.com/conflux-developments/setup-handbook/blob/HEAD/install-conflux-wallet-on-windows.md) | Run the Windows installer, allow the permission prompt, and open the app; the steps assume a standard 64-bit Windows 10 or later system. |
+| [Conflux Wallet Download and Current Release](https://github.com/conflux-developments/setup-handbook/blob/HEAD/conflux-wallet-download-guide.md) | Download the installer for Windows, macOS or Linux from the project's GitHub releases page, then check the file name against the published version. |
+| [Restore Conflux Wallet From Seed Phrase](https://github.com/conflux-developments/recovery-playbook/blob/HEAD/restore-conflux-wallet-from-seed-phrase.md) | Choose restore rather than create, enter the words in order, in lowercase, with single spaces, and let the app derive the accounts. |
+| [Core Space vs eSpace](https://github.com/conflux-developments/setup-handbook/blob/HEAD/conflux-core-space-vs-espace.md) | Core Space uses cfx: addresses and native transfers; eSpace uses 0x addresses and EVM contracts, and the same phrase produces an account in each. |
 
 </div>
 
 [All Conflux Wallet guides](https://github.com/conflux-developments/setup-handbook/blob/HEAD/README.md)
+
+## Common first questions
+
+### Does Conflux Wallet hold both spaces at once?
+
+Yes. One recovery phrase derives a Core Space account and an eSpace account, and the app shows which one is active on every screen. They are separate accounts with separate balances, not two views of one number.
+
+### Does updating replace my accounts?
+
+No. Installing the current release over an existing copy replaces the application and keeps the encrypted key store, so accounts and the password remain. The phrase still restores them on another machine.
+
+### Can I run it on more than one computer?
+
+Yes, with the same recovery phrase. Each installation derives the same accounts, and the phrase is the only thing that has to move between them.
+
+### What happens if I lose the password?
+
+The recovery phrase is the route back. There is no reset link, because no server holds the account or the password.
 
 ---
 
